@@ -1,7 +1,2 @@
-firebase_credentials.json
-cert.pem
-key.pem
-ac_venv/
-myenv/
-**/__pycache__/
 __pycache__/
+myenv/

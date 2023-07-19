@@ -1,9 +1,9 @@
-from flask import Blueprint, render_template, url_for, redirect, request,jsonify,flash,current_app
-from .firebase_service import guardar_cita
+from flask import Flask, request
+from firebase_service import guardar_cita
 
-service_api_bp = Blueprint("service_api_bp", __name__, template_folder="templates", static_folder="static")
+app = Flask(__name__)
 
-@service_api_bp.route('/api/citas', methods=['POST'])
+@app.route('/api/citas', methods=['POST'])
 def crear_cita():
     datos_cita = request.get_json()
     hora = datos_cita['hora']
@@ -17,3 +17,6 @@ def crear_cita():
     id_cita = guardar_cita(hora, nombre, documento_identidad, num_celular, email, servicio_cita, eps_remitente)
 
     return {'mensaje': 'Cita creada correctamente', 'id_cita': id_cita}
+
+if __name__ == '__main__':
+    app.run()
